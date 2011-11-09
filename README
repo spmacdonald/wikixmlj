@@ -1,0 +1,8 @@
+A Java API to parse Wikipedia XML dumps
+
+Forked from: http://code.google.com/p/wikixmlj/
+
+Changes:
+
+* Fixed UTF-8 bug
+* Changed Vector->HashSet where appropriate
