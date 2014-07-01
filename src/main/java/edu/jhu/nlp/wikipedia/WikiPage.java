@@ -11,6 +11,7 @@ import java.util.HashSet;
 public class WikiPage {
 
     private String title = null;
+    private String contributor = null;
     private WikiTextParser wikiTextParser = null;
     private String id = null;
 
@@ -123,5 +124,13 @@ public class WikiPage {
 
     public String getID() {
         return id;
+    }
+
+    public String getContributor() {
+        return contributor;
+    }
+
+    public void setContributor(String contributor) {
+        this.contributor = contributor;
     }
 }

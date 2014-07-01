@@ -19,6 +19,7 @@ public class SAXPageCallbackHandler extends DefaultHandler {
     private StringBuilder currentWikitext;
     private StringBuilder currentTitle;
     private StringBuilder currentID;
+    private StringBuilder currentContributor;
 
     public SAXPageCallbackHandler(PageCallbackHandler ph){
         pageHandler = ph;
@@ -31,6 +32,7 @@ public class SAXPageCallbackHandler extends DefaultHandler {
             currentPage = new WikiPage();
             currentWikitext = new StringBuilder("");
             currentTitle = new StringBuilder("");
+            currentContributor = new StringBuilder("");
             currentID = new StringBuilder("");
         }
     }
@@ -41,6 +43,7 @@ public class SAXPageCallbackHandler extends DefaultHandler {
             currentPage.setTitle(currentTitle.toString());
             currentPage.setID(currentID.toString());
             currentPage.setWikiText(currentWikitext.toString());
+            currentPage.setContributor(currentContributor.toString().trim());
             pageHandler.process(currentPage);
         }
         if (qName.equals("mediawiki"))
@@ -53,6 +56,9 @@ public class SAXPageCallbackHandler extends DefaultHandler {
     public void characters(char ch[], int start, int length){
         if (currentTag.equals("title")){
             currentTitle = currentTitle.append(ch, start, length);
+        }
+        if (currentTag.equals("username")){
+            currentContributor.append(ch, start, length);
         }
         // TODO: To avoid looking at the revision ID, only the first ID is taken.
         // I'm not sure how big the block size is in each call to characters(),
